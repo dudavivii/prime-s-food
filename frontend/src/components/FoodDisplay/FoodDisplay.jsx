@@ -3,7 +3,7 @@ import './FoodDisplay.css'
 import { StoreContext } from '../../Context/StoreContext'
 import FoodiItem from '../FoodItem/FoodItem'
 
-const FoodDisplay = (category) => {
+const FoodDisplay = ({category}) => {
  
     const {food_list} = useContext(StoreContext)
  
@@ -12,8 +12,12 @@ const FoodDisplay = (category) => {
       <h2>top comidas para você</h2>
       <div className='food-display-list'>
         {food_list.map((item,index)=>{
-            return <FoodiItem key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image} />
+            {console.log(category,item.category);}
+            if (category==="All" || category===item.category) {
+                return <FoodiItem key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image} />
         
+            }
+          
         })}
       </div>
     </div>
